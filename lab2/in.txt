@@ -1,4 +1,3 @@
-IDN 1 a
-OP_PRIDRUZI 1 =
-BROJ 1 0
+IDN 2 a
+OP_PRIDRUZI 2 +=
 

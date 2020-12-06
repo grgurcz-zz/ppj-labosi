@@ -33,9 +33,9 @@ def naredba():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<naredba>')
     space_count += 1
-    if lines[line_position].split()[0] == 'IDN':
+    if line_position < line_count and lines[line_position].split()[0] == 'IDN':
         naredba_pridruzivanja()
-    elif lines[line_position].split()[0] == 'KR_ZA':
+    elif line_position < line_count and lines[line_position].split()[0] == 'KR_ZA':
         za_petlja()
     else:
         err_positions.append(line_position)
@@ -46,10 +46,10 @@ def naredba_pridruzivanja():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<naredba_pridruzivanja>')
     space_count += 1
-    if lines[line_position].split()[0] == 'IDN':
+    if line_position < line_count and lines[line_position].split()[0] == 'IDN':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
-        if lines[line_position].split()[0] == 'OP_PRIDRUZI':
+        if line_position < line_count and lines[line_position].split()[0] == 'OP_PRIDRUZI':
             output_list.append(' ' * space_count + lines[line_position])
             line_position += 1
             E()
@@ -64,23 +64,23 @@ def za_petlja():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<za_petlja>')
     space_count += 1
-    if lines[line_position].split()[0] == 'KR_ZA':
+    if line_position < line_count and lines[line_position].split()[0] == 'KR_ZA':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
-        if lines[line_position].split()[0] == 'IDN':
+        if line_position < line_count and lines[line_position].split()[0] == 'IDN':
             output_list.append(' ' * space_count + lines[line_position])
             line_position += 1
-            if lines[line_position].split()[0] == 'KR_OD':
+            if line_position < line_count and lines[line_position].split()[0] == 'KR_OD':
                 output_list.append(' ' * space_count + lines[line_position])
                 line_position += 1
                 E()
-                if lines[line_position].split()[0] == 'KR_DO':
+                if line_position < line_count and lines[line_position].split()[0] == 'KR_DO':
                     output_list.append(' ' * space_count +
                                        lines[line_position])
                     line_position += 1
                     E()
                     lista_naredbi()
-                    if lines[line_position].split()[0] == 'KR_AZ':
+                    if line_position < line_count and lines[line_position].split()[0] == 'KR_AZ':
                         output_list.append(
                             ' ' * space_count + lines[line_position])
                         line_position += 1
@@ -101,7 +101,7 @@ def E():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<E>')
     space_count += 1
-    if lines[line_position].split()[0] in ['IDN', 'BROJ', 'OP_PLUS', 'OP_MINUS', 'L_ZAGRADA']:
+    if line_position < line_count and lines[line_position].split()[0] in ['IDN', 'BROJ', 'OP_PLUS', 'OP_MINUS', 'L_ZAGRADA']:
         T()
         E_lista()
     else:
@@ -113,13 +113,13 @@ def E_lista():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<E_lista>')
     space_count += 1
-    if line_position >= line_count or lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
+    if line_position < line_count and lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
         output_list.append(' ' * space_count + '$')
-    elif lines[line_position].split()[0] == 'OP_PLUS':
+    elif line_position < line_count and lines[line_position].split()[0] == 'OP_PLUS':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         E()
-    elif lines[line_position].split()[0] == 'OP_MINUS':
+    elif line_position < line_count and lines[line_position].split()[0] == 'OP_MINUS':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         E()
@@ -132,7 +132,7 @@ def T():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<T>')
     space_count += 1
-    if lines[line_position].split()[0] in ['IDN', 'BROJ', 'OP_PLUS', 'OP_MINUS', 'L_ZAGRADA']:
+    if line_position < line_count and lines[line_position].split()[0] in ['IDN', 'BROJ', 'OP_PLUS', 'OP_MINUS', 'L_ZAGRADA']:
         P()
         T_lista()
     else:
@@ -163,27 +163,27 @@ def P():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<P>')
     space_count += 1
-    if lines[line_position].split()[0] == 'OP_PLUS':
+    if line_position < line_count and lines[line_position].split()[0] == 'OP_PLUS':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         P()
-    elif lines[line_position].split()[0] == 'OP_MINUS':
+    elif line_position < line_count and lines[line_position].split()[0] == 'OP_MINUS':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         P()
-    elif lines[line_position].split()[0] == 'L_ZAGRADA':
+    elif line_position < line_count and lines[line_position].split()[0] == 'L_ZAGRADA':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         E()
-        if lines[line_position].split()[0] == 'D_ZAGRADA':
+        if line_position < line_count and lines[line_position].split()[0] == 'D_ZAGRADA':
             output_list.append(' ' * space_count + lines[line_position])
             line_position += 1
         else:
             err_positions.append(line_position)
-    elif lines[line_position].split()[0] == 'IDN':
+    elif line_position < line_count and lines[line_position].split()[0] == 'IDN':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
-    elif lines[line_position].split()[0] == 'BROJ':
+    elif line_position < line_count and lines[line_position].split()[0] == 'BROJ':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
     else:
