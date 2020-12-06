@@ -195,7 +195,7 @@ all_text = sys.stdin.readlines()
 lines = []
 for line in all_text:
     lines.append(line.strip())
-line_count = len(lines)
+    line_count += 1
 
 program()
 
