@@ -113,7 +113,9 @@ def E_lista():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<E_lista>')
     space_count += 1
-    if lines[line_position].split()[0] == 'OP_PLUS':
+    if line_position >= line_count or lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
+        output_list.append(' ' * space_count + '$')
+    elif lines[line_position].split()[0] == 'OP_PLUS':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         E()
@@ -121,8 +123,6 @@ def E_lista():
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         E()
-    elif line_position == line_count or lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
-        output_list.append(' ' * space_count + '$')
     else:
         err_positions.append(line_position)
     space_count -= 1
@@ -144,7 +144,9 @@ def T_lista():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<T_lista>')
     space_count += 1
-    if lines[line_position].split()[0] == 'OP_PUTA':
+    if line_position >= line_count or lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'OP_PLUS', 'OP_MINUS', 'D_ZAGRADA']:
+        output_list.append(' ' * space_count + '$')
+    elif lines[line_position].split()[0] == 'OP_PUTA':
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         T()
@@ -152,8 +154,6 @@ def T_lista():
         output_list.append(' ' * space_count + lines[line_position])
         line_position += 1
         T()
-    elif lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'OP_PLUS', 'OP_MINUS', 'D_ZAGRADA']:
-        output_list.append(' ' * space_count + '$')
     else:
         err_positions.append(line_position)
     space_count -= 1
