@@ -113,7 +113,7 @@ def E_lista():
     global line_position, line_count, space_count
     output_list.append(' ' * space_count + '<E_lista>')
     space_count += 1
-    if line_position < line_count and lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
+    if line_position >= line_count or lines[line_position].split()[0] in ['IDN', 'KR_ZA', 'KR_DO', 'KR_AZ', 'D_ZAGRADA']:
         output_list.append(' ' * space_count + '$')
     elif line_position < line_count and lines[line_position].split()[0] == 'OP_PLUS':
         output_list.append(' ' * space_count + lines[line_position])
